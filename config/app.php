@@ -127,6 +127,8 @@ return [
 
     'iped_token' => env('IPED_TOKEN'),
 
+    'iped_group' => env('IPED_GROUP'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -170,7 +172,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
+        Barryvdh\Snappy\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -222,9 +224,10 @@ return [
         'Mail'         => Illuminate\Support\Facades\Mail::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password'     => Illuminate\Support\Facades\Password::class,
+        'PDF'          => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'Queue'        => Illuminate\Support\Facades\Queue::class,
         'RateLimiter'  => Illuminate\Support\Facades\RateLimiter::class,
-        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
+        'ReCaptcha'    => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Redirect'     => Illuminate\Support\Facades\Redirect::class,
         // 'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request'      => Illuminate\Support\Facades\Request::class,
@@ -232,6 +235,7 @@ return [
         'Route'        => Illuminate\Support\Facades\Route::class,
         'Schema'       => Illuminate\Support\Facades\Schema::class,
         'Session'      => Illuminate\Support\Facades\Session::class,
+        'SnappyImage'  => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Storage'      => Illuminate\Support\Facades\Storage::class,
         'Str'          => Illuminate\Support\Str::class,
         'URL'          => Illuminate\Support\Facades\URL::class,
