@@ -12,5 +12,22 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/admin.js', 'public/js')
+    .js('resources/js/checkout/checkout.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+    .sass('resources/sass/admin.scss', 'public/css')
+    .sass('resources/sass/checkout.scss', 'public/css')
+
+    .options({
+        processCssUrls: false
+    });
+
+ mix.version();
+
+if (!mix.inProduction()) {
+    mix.browserSync({
+        proxy: 'localhost:8000'
+    });
+}
+
+mix.disableNotifications();
