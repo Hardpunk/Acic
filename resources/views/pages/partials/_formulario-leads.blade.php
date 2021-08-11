@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn bg-white acim-text-color text-white ml-0">
+                                <button type="submit" class="btn bg-white acim-text-color ml-0">
                                     <i class="fas fa-paper-plane"></i>
                                     <span class="font-weight-bold">ENVIAR</span>
                                 </button>

@@ -1,35 +1,24 @@
-<section class="mt-0 py-5 mb-6 bg-banner-fixo">
-    <div class="container-fluid px-lg-5">
-        <div class="row align-items-center py-lg-5">
-            <div class="col-12">
-                <div class="row py-5 pl-lg-5">
-                    <div class="col-12 ">
-                        <h1 class="color-white">
-                            Somos a sua plataforma <br>
-                            de aprendizagem contínua
-                        </h1>
-                        <p class="texto-banner">A busca pelo conhecimento<br>
-                            é o primeiro passo...
-                        </p>
-                    </div>
-                    <div class="col-sm-9 col-md-7 col-lg-6 col-xl-4">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a href="/para-empresas#contato-empresas"
-                                    class="btn btn-block btn-md btn-read-more font-weight-bold waves-effect waves-light m-0 btn-banner-1">
-                                    Capacite a sua equipe
-                                </a>
-                            </div>
-                            <div class="col-sm-6 mt-3 mt-sm-0">
-                                <a href="/#planos"
-                                    class="btn btn-block btn-md btn-read-more font-weight-bold waves-effect waves-light m-0 btn-banner-2">
-                                    Planos de aprendizagem
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<section id="carouselSite" class="row carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @for($i = 1; $i <= 2; $i++)
+            <div class="carousel-item{{ $i === 1 ? ' active' : '' }}">
+                <img src="{{ asset("images/banners/banner{$i}.jpg") }}" class="img-fluid d-block w-100">
             </div>
-        </div>
+        @endfor
     </div>
+    <ol class="carousel-indicators">
+        @for($i = 0; $i < 2; $i++)
+            <li data-target="#carouselSite" data-slide-to="{{ $i }}" class="{{ $i === 0 ? ' active' : '' }}"></li>
+        @endfor
+    </ol>
+
+    <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="sr-only"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselSite" role="button" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="sr-only"></span>
+    </a>
 </section>

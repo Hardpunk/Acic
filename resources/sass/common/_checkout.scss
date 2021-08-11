@@ -24,7 +24,7 @@ html {
                 .empty-checkout {
                     &-link {
                         .empty-checkout-button {
-                            background: $acim-text-color !important;
+                            background: $theme-color-1 !important;
                             text-transform: uppercase;
                             color: #fff;
                             padding: 10px 30px;
@@ -262,7 +262,7 @@ html {
     }
 }
 .btn-theme {
-    background: $acim-text-color !important;
+    background: $theme-color-1 !important;
     text-transform: uppercase;
     color: #fff !important;
     text-decoration: none !important;
@@ -275,14 +275,14 @@ html {
 }
 .btn-theme-color {
     color: $white;
-    background-color: $acim-text-color;
-    border-color: $acim-text-color;
+    background-color: $theme-color-1;
+    border-color: $theme-color-1;
 }
 .theme-text-color {
-    color: $acim-text-color;
+    color: $theme-color-1;
 }
 .theme-background-color {
-    background-color: $acim-text-color;
+    background-color: $theme-color-1;
 }
 .modal {
     position: fixed;
@@ -309,7 +309,7 @@ html {
 #payment-confirmation-modal {
     height: auto;
     &.default-modal {
-        background: $acim-text-color;
+        background: $theme-color-1;
         color: #fff;
         font-size: 18px;
         line-height: 1.3;

@@ -8,7 +8,6 @@ use App\Http\Requests\PaymentRequest;
 use App\Mail\PaymentDone;
 use App\Mail\PaymentWaiting;
 use App\Payment;
-use App\Plan;
 use App\Trail;
 use App\User;
 use Auth;

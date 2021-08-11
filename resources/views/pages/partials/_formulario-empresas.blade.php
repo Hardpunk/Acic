@@ -85,7 +85,7 @@
                         </div>
                         <div class="row col-12">
                             <div class="form-group">
-                                <button type="submit" class="btn bg-white acim-text-color text-white">
+                                <button type="submit" class="btn bg-white acim-text-color">
                                     <i class="fas fa-paper-plane"></i>
                                     <span class="font-weight-bold">ENVIAR</span>
                                 </button>
