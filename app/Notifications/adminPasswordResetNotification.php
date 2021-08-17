@@ -50,7 +50,7 @@ class adminPasswordResetNotification extends Notification
             ->line(__('You are receiving this email because we received a password reset request for your account.'))
             ->action(
                 'Alterar senha',
-                url(config('app.url').route('admin.password.reset.index', ['token' => $this->token], false))
+                url(config('app.url').route('admin.password.reset', ['token' => $this->token], false))
             )
             ->line(__("This password reset link will expire in :count minutes.", ['count' => config('auth.passwords.admins.expire')]))
             ->line(__("If you did not request a password reset, no further action is required."));
