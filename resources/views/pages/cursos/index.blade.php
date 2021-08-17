@@ -44,7 +44,3 @@
         </div>
     </section>
 @endsection
-
-@section('js')
-    <script src="{{ asset('js/init.js') }}?v={{ time() }}"></script>
-@endsection

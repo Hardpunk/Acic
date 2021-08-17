@@ -36,8 +36,8 @@
                     <tr>
                         <td class="header"
                             style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 10px 0; text-align: center;">
-                            <a href="https://www.isigtreinamentos.com.br" target="_blank">
-                                <img src="https://www.isigtreinamentos.com.br/images/logo-small.png"
+                            <a href="{{ config('app.url') }}" target="_blank">
+                                <img src="{{ config('app.url') }}/images/logo-small.png"
                                     alt="{{ config('app.name') }}" title="{{ config('app.name') }}"
                                     style="width: 200px;" />
                             </a>
@@ -97,7 +97,7 @@
                                                 <td align="center" valign="top">
                                                     <p
                                                         style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 14px; line-height: 1.5em; margin-top: 15px; text-align: left;">
-                                                        <span>contato@isigtreinamentos.com.br</span>
+                                                        <span>escoladenegocios@aciccaruaru.com</span>
                                                     </p>
                                                     <p
                                                         style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 14px; line-height: 1.5em; text-align: left;">

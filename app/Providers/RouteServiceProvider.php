@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use File;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -37,16 +38,26 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+        $this->routes(
+            function () {
+                Route::prefix('api')
+                    ->middleware('api')
+                    ->namespace($this->namespace)
+                    ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-        });
+                Route::middleware('web')
+                    ->namespace($this->namespace)
+                    //->group(base_path('routes/web.php'));
+                    ->group(
+                        function ($router) {
+                            $files = File::allFiles(base_path('routes/web'));
+                            foreach ($files as $file) {
+                                require base_path("routes/web/{$file->getFilename()}");
+                            }
+                        }
+                    );
+            }
+        );
     }
 
     /**
@@ -56,8 +67,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
+        RateLimiter::for(
+            'api',
+            function (Request $request) {
+                return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            }
+        );
     }
 }

@@ -34,7 +34,7 @@ class CreateContactRequest extends FormRequest
     /**
      * Handle a failed validation attempt.
      *
-     * @param  \Illuminate\Contracts\Validation\Validator $validator
+     * @param  Validator  $validator
      * @return void
      *
      * @throws \Illuminate\Validation\ValidationException

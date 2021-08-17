@@ -31,7 +31,7 @@ class CouponController extends AppBaseController
     public function index(CouponDataTable $couponDataTable)
     {
         $user = Auth::user();
-        return $couponDataTable->render('coupons.index', compact('user'));
+        return $couponDataTable->render('admin.coupons.index', compact('user'));
     }
 
     /**
@@ -42,7 +42,7 @@ class CouponController extends AppBaseController
     public function create()
     {
         $user = Auth::user();
-        return view('coupons.create', compact('user'));
+        return view('admin.coupons.create', compact('user'));
     }
 
     /**
@@ -81,7 +81,7 @@ class CouponController extends AppBaseController
             return redirect(route('admin.coupons.index'));
         }
 
-        return view('coupons.edit', compact('coupon', 'user'));
+        return view('admin.coupons.edit', compact('coupon', 'user'));
     }
 
     /**

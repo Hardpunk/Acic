@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Payment;
+use App\Payment;
 
 class UpdatePaymentRequest extends FormRequest
 {
@@ -26,7 +26,7 @@ class UpdatePaymentRequest extends FormRequest
     public function rules()
     {
         $rules = Payment::$rules;
-        
+
         return $rules;
     }
 }

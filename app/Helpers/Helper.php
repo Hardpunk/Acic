@@ -1,7 +1,6 @@
 <?php
 
 if (!function_exists('format_cpf_cnpj')) {
-
     /**
      * Format CPF/CNPJ
      *
@@ -21,7 +20,6 @@ if (!function_exists('format_cpf_cnpj')) {
 }
 
 if (!function_exists('getFirstName')) {
-
     /**
      * Get First Name
      *
@@ -36,7 +34,6 @@ if (!function_exists('getFirstName')) {
 }
 
 if (!function_exists('getLastName')) {
-
     /**
      * Get First Name
      *
@@ -50,7 +47,6 @@ if (!function_exists('getLastName')) {
 }
 
 if (!function_exists('remove_special_char')) {
-
     /**
      * Get First Name
      *
@@ -66,7 +62,6 @@ if (!function_exists('remove_special_char')) {
 }
 
 if (!function_exists('get_language_country_flag')) {
-
     /**
      * Get First Name
      *
@@ -77,64 +72,64 @@ if (!function_exists('get_language_country_flag')) {
     {
         $language_codes = [
             'ar' => [
-                'country' => 'Arábia Saudita',
+                'country'  => 'Arábia Saudita',
                 'language' => 'Árabe',
-                'file' => 'saudi-arabia',
+                'file'     => 'saudi-arabia',
             ],
             'en' => [
-                'country' => 'Estados Unidos',
+                'country'  => 'Estados Unidos',
                 'language' => 'Inglês',
-                'file' => 'united-states-of-america',
+                'file'     => 'united-states-of-america',
             ],
             'es' => [
-                'country' => 'Espanha',
+                'country'  => 'Espanha',
                 'language' => 'Espanhol',
-                'file' => 'spain',
+                'file'     => 'spain',
             ],
             'de' => [
-                'country' => 'Alemanha',
+                'country'  => 'Alemanha',
                 'language' => 'Alemão',
-                'file' => 'germany',
+                'file'     => 'germany',
             ],
             'fr' => [
-                'country' => 'França',
+                'country'  => 'França',
                 'language' => 'Francês',
-                'file' => 'france',
+                'file'     => 'france',
             ],
             'it' => [
-                'country' => 'Itália',
+                'country'  => 'Itália',
                 'language' => 'Italiano',
-                'file' => 'italy',
+                'file'     => 'italy',
             ],
             'ja' => [
-                'country' => 'Japão',
+                'country'  => 'Japão',
                 'language' => 'Japonês',
-                'file' => 'japan',
+                'file'     => 'japan',
             ],
             'nl' => [
-                'country' => 'Holanda',
+                'country'  => 'Holanda',
                 'language' => 'Holandês',
-                'file' => 'netherlands',
+                'file'     => 'netherlands',
             ],
             'pl' => [
-                'country' => 'Polônia',
+                'country'  => 'Polônia',
                 'language' => 'Polonês',
-                'file' => 'republic-of-poland',
+                'file'     => 'republic-of-poland',
             ],
             'pt' => [
-                'country' => 'Brasil',
+                'country'  => 'Brasil',
                 'language' => 'Português',
-                'file' => 'brazil',
+                'file'     => 'brazil',
             ],
             'ru' => [
-                'country' => 'Rússia',
+                'country'  => 'Rússia',
                 'language' => 'Russo',
-                'file' => 'russia',
+                'file'     => 'russia',
             ],
             'zh' => [
-                'country' => 'China',
+                'country'  => 'China',
                 'language' => 'Chinês',
-                'file' => 'china',
+                'file'     => 'china',
             ],
         ];
 
@@ -144,14 +139,13 @@ if (!function_exists('get_language_country_flag')) {
 }
 
 if (!function_exists('truncate_text_at_word')) {
-
     /**
      * Truncate text at word
      *
-     * @param mixed $string
-     * @param mixed $limit
-     * @param string $break
-     * @param string $pad
+     * @param  mixed  $string
+     * @param  mixed  $limit
+     * @param  string  $break
+     * @param  string  $pad
      * @return mixed
      */
     function truncate_text_at_word($string, $limit, $break = ".", $pad = "...")
@@ -161,7 +155,7 @@ if (!function_exists('truncate_text_at_word')) {
         }
         if (false !== ($max = strpos($string, $break, $limit))) {
             if ($max < strlen($string) - 1) {
-                $string = substr($string, 0, $max) . $pad;
+                $string = substr($string, 0, $max).$pad;
             }
         }
         return $string;
@@ -169,11 +163,10 @@ if (!function_exists('truncate_text_at_word')) {
 }
 
 if (!function_exists('check_remote_file')) {
-
     /**
      * Check if remote file exists
      *
-     * @param string $url
+     * @param  string  $url
      * @return bool
      */
     function check_remote_file($url)
@@ -203,12 +196,12 @@ if (!function_exists('only_numbers')) {
     /**
      * Returns only numbers
      *
-     * @param string $number
+     * @param  string  $number
      * @return string
      */
     function only_numbers($number)
     {
-        return (string) preg_replace('/\D/', '', $number);
+        return (string)preg_replace('/\D/', '', $number);
     }
 }
 
@@ -216,7 +209,7 @@ if (!function_exists('generateAvatar')) {
     /**
      * Generate avatar by user name
      *
-     * @param string $fullname
+     * @param  string  $fullname
      * @return string
      */
     function generateAvatar($fullname)
@@ -230,7 +223,7 @@ if (!function_exists('get_payment_status')) {
     /**
      * Get status message
      *
-     * @param string $code
+     * @param  string  $code
      * @return string
      */
     function get_payment_status($code)
@@ -274,11 +267,48 @@ if (!function_exists('get_payment_status')) {
     }
 }
 
+if (!function_exists('get_payment_status_label')) {
+    /**
+     * Get status message
+     *
+     * @param  string  $status
+     * @return string
+     */
+    function get_payment_status_label($status)
+    {
+        switch ($status) {
+            case 'Aguardando pagamento':
+            case 'Em análise':
+            case 'Em revisão':
+            case 'Em processo':
+                $class = 'info';
+                break;
+            case 'Aprovado':
+            case 'Autorizada':
+                $class = 'success';
+                break;
+            case 'Estorno boleto':
+            case 'Estornada':
+                $class = 'warning';
+                break;
+            case 'Chargeback':
+            case 'Recusado':
+                $class = 'danger';
+                break;
+            default:
+                $status = '';
+                $class = '';
+        }
+
+        return "<span class='badge badge-{$class}'>{$status}</span>";
+    }
+}
+
 if (!function_exists('get_payment_type')) {
     /**
      * Get payment type
      *
-     * @param string $type
+     * @param  string  $type
      * @return string
      */
     function get_payment_type($type)
@@ -328,7 +358,7 @@ if (!function_exists('round_up')) {
      */
     function round_up($number, $precision = 2)
     {
-        $fig = (int) str_pad('1', $precision, '0');
+        $fig = (int)str_pad('1', $precision, '0');
         $rounded = (ceil($number * $fig) / $fig);
         return number_format($rounded, 2, ',', '.');
     }
@@ -342,7 +372,7 @@ if (!function_exists('round_down')) {
      */
     function round_down($number, $precision = 2)
     {
-        $fig = (int) str_pad('1', $precision, '0');
+        $fig = (int)str_pad('1', $precision, '0');
         $rounded = (floor($number * $fig) / $fig);
         return number_format($rounded, 2, ',', '.');
     }

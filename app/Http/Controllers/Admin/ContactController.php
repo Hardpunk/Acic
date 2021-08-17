@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\ContactDataTable;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateContactRequest;
-use App\Http\Requests\UpdateContactRequest;
 use App\Repositories\ContactRepository;
 use Auth;
+use Exception;
 use Flash;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Response;
 
 class ContactController extends AppBaseController
@@ -24,21 +27,20 @@ class ContactController extends AppBaseController
     /**
      * Display a listing of the Contact.
      *
-     * @param ContactDataTable $contactDataTable
+     * @param  ContactDataTable  $contactDataTable
      * @return Response
      */
     public function index(ContactDataTable $contactDataTable)
     {
         $user = Auth::user();
-        return $contactDataTable->render('contacts.index', compact('user'));
+        return $contactDataTable->render('admin.contacts.index', compact('user'));
     }
 
     /**
      * Store a newly created Contact in storage.
      *
-     * @param CreateContactRequest $request
-     *
-     * @return Response
+     * @param  CreateContactRequest  $request
+     * @return RedirectResponse|JsonResponse
      */
     public function store(CreateContactRequest $request)
     {
@@ -57,9 +59,9 @@ class ContactController extends AppBaseController
     /**
      * Display the specified Contact.
      *
-     * @param  int $id
+     * @param  int  $id
      *
-     * @return Response
+     * @return View|RedirectResponse
      */
     public function show($id)
     {
@@ -72,15 +74,16 @@ class ContactController extends AppBaseController
             return redirect(route('admin.contacts.index'));
         }
 
-        return view('contacts.show', compact('contact', 'user'));
+        return view('admin.contacts.show', compact('contact', 'user'));
     }
 
     /**
      * Remove the specified Contact from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      *
-     * @return Response
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy($id)
     {

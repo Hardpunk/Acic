@@ -50,7 +50,7 @@ class UserDataTable extends DataTable
             // ])
             ->parameters([
                 'language' => [
-                    'url' => '//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json',
+                    'url' => '//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json',
                 ],
                 'dom' => 'Bfrtip',
                 'stateSave' => true,

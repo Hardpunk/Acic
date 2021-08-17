@@ -9,45 +9,10 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
+|--------------------------------------------------------------------------
+| Client Unauthenticated Routes
+|--------------------------------------------------------------------------
  */
-
-Route::prefix('painel')->name('admin.')->group(
-    function () {
-        Route::namespace('Admin')->group(
-            function () {
-                Route::middleware('guest:admin')->group(
-                    function () {
-                        Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-                        Route::post('/login', 'Auth\LoginController@login')->name('auth_login');
-                    }
-                );
-
-                Route::middleware('auth:admin')->group(
-                    function () {
-                        Route::get('/', 'HomeController@index')->name('home');
-                        Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-                        Route::prefix('users')->group(
-                            function () {
-                                Route::get('/', 'UserController@index')->name('users.index');
-                                Route::get('/registered', 'UserController@registered')->name('users.registered');
-                                Route::get('/unregistered', 'UserController@unregistered')->name('users.unregistered');
-                            }
-                        );
-                        Route::resource('payments', 'PaymentController')->only(['index', 'show']);
-                        Route::resource('coupons', 'CouponController');
-                        Route::resource('plans', 'PlanController')->except(['create', 'store', 'show', 'destroy']);
-                        Route::resource('newsletters', 'NewsletterController')->only(['index', 'destroy']);
-                        Route::resource('contacts', 'ContactController')->only(['index', 'show', 'destroy']);
-                        Route::resource('contactsBusiness', 'BusinessContactController')->only(
-                            ['index', 'show', 'destroy']
-                        );
-                    }
-                );
-            }
-        );
-    }
-);
-
 Route::prefix('aluno')->name('user.')->namespace('User')->group(
     function () {
         Route::get(
@@ -74,6 +39,11 @@ Route::prefix('aluno')->name('user.')->namespace('User')->group(
     }
 );
 
+/*
+|--------------------------------------------------------------------------
+| Client Authenticated Routes
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth:user')->group(
     function () {
         Route::get('/account', 'User\HomeController@index')->name('user.home');
@@ -83,7 +53,6 @@ Route::middleware('auth:user')->group(
             ['prefix' => '/checkout'],
             function () {
                 Route::get('/', 'CheckoutController@index')->name('checkout.index');
-                Route::get('/plan/{plan}', 'CheckoutController@plan')->name('checkout.plan');
                 Route::get('/confirmation/{order}', 'CheckoutController@confirmation')->name('checkout.confirmation');
                 Route::post('/payment', 'CheckoutController@payment')->name('checkout.payment');
                 Route::post('/addCoupon', 'CheckoutController@addCoupon')->name('checkout.addCoupon');
@@ -92,14 +61,21 @@ Route::middleware('auth:user')->group(
     }
 );
 
+/*
+|--------------------------------------------------------------------------
+| Pages Routes
+|--------------------------------------------------------------------------
+ */
+
+// Home
 Route::get('/', 'PageController@home')->name('home');
 
-Route::get('/contato', 'PageController@contato')->name('contato');
+// Search results
+Route::get('/search', 'SearchController@search')->name('search');
 
 // Route::get('/termos-de-uso', 'PageController@termos')->name('termos-de-uso');
 
-Route::get('/search', 'SearchController@search')->name('search');
-
+// Course routes group
 Route::group(
     ['prefix' => '/cursos'],
     function () {
@@ -109,6 +85,7 @@ Route::group(
     }
 );
 
+// Trail routes group
 Route::group(
     ['prefix' => '/trilhas-conhecimento'],
     function () {
@@ -121,6 +98,7 @@ Route::group(
     }
 );
 
+// Cart routes group
 Route::group(
     ['prefix' => '/cart'],
     function () {
@@ -130,8 +108,13 @@ Route::group(
     }
 );
 
-Route::get('/pagarme/callback', 'PostbackController@callback')->name('pagarme.callback');
+//Route::get('/pagarme/callback', 'PostbackController@callback')->name('pagarme.callback');
 
+/*
+|--------------------------------------------------------------------------
+| AJAX Requests Routes
+|--------------------------------------------------------------------------
+*/
 Route::group(
     ['prefix' => '/ajax'],
     function () {
@@ -144,10 +127,14 @@ Route::group(
         );
         Route::post('/newsletter', 'Admin\NewsletterController@store')->name('ajax.newsletter.store');
         Route::post('/contact', 'Admin\ContactController@store')->name('ajax.newsletter.store');
-        Route::post('/business', 'Admin\BusinessContactController@store')->name('ajax.newsletter.store');
     }
 );
 
+/*
+|--------------------------------------------------------------------------
+| CRON Jobs Routes
+|--------------------------------------------------------------------------
+*/
 Route::group(
     ['prefix' => '/cron'],
     function () {

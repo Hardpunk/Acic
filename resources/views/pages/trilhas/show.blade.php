@@ -150,12 +150,10 @@
         @include('pages.trilhas._trail-skills')
     </section>
 
-
     @include('pages.partials._faq')
 @endsection
 
 @section('js')
     <script src="{{ asset('js/ResizeSensor.js') }}"></script>
     <script src="{{ asset('js/jquery.sticky-sidebar.min.js') }}"></script>
-    <script src="{{ asset('js/init.js') }}?v={{ time() }}"></script>
 @endsection

@@ -7,7 +7,7 @@
         @if(count($destaques) > 0)
             <div class="row">
                 @foreach($destaques as $categoria)
-                    <div class="col-md-6 col-lg-4 p-4 col-sm-12">
+                    <div class="col-md-6 col-lg-4 p-md-4 col-sm-12 my-3 my-md-0">
                         <div class="card category-item item">
                             <a class="url-curso" href="{{ route('courses.category', $categoria->slug) }}"
                                title="{{ $categoria->title }}">

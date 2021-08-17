@@ -1,4 +1,4 @@
-<section id="carouselSite" class="row carousel slide" data-ride="carousel">
+<section id="carouselSite" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         @for($i = 1; $i <= 2; $i++)
             <div class="carousel-item{{ $i === 1 ? ' active' : '' }}">

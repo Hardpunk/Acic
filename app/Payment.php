@@ -20,7 +20,7 @@ class Payment extends Model
         'cc_number'            => 'required_if:payment_method,credit_card',
         'cc_holder'            => 'required_if:payment_method,credit_card',
         'cc_expiry_month'      => 'required_if:payment_method,credit_card|date_format:m',
-        'cc_expiry_month'      => 'required_if:payment_method,credit_card|date_format:Y',
+        'cc_expiry_year'       => 'required_if:payment_method,credit_card|date_format:Y',
         'cc_cvv'               => 'required_if:payment_method,credit_card|numeric',
         'cc_installments'      => 'required_if:payment_method,credit_card|integer',
         'zipcode'              => 'required',
@@ -97,14 +97,21 @@ class Payment extends Model
         return $this->hasOne(Coupon::class, 'id', 'coupon_id');
     }
 
+    public function items()
+    {
+        $trails = $this->trails->toArray();
+        $courses = $this->courses->toArray();
+        return array_merge($trails, $courses);
+    }
+
     /**
      * Prepare a date for array / JSON serialization.
      *
      * @param  DateTimeInterface  $date
      * @return string
      */
-    /*protected function serializeDate(DateTimeInterface $date)
+    protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('d/m/Y H:i:s');
-    }*/
+    }
 }

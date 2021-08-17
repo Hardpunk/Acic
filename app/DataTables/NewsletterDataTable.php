@@ -11,20 +11,20 @@ class NewsletterDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'newsletters.datatables_actions');
+        return $dataTable->addColumn('action', 'admin.newsletters.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Newsletter $model
+     * @param  Newsletter  $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Newsletter $model)
@@ -42,27 +42,31 @@ class NewsletterDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction([
-                'width' => '80px',
-                'title' => 'Ações',
-                'className' => 'text-center',
-                'printable' => false,
-            ])
-            ->parameters([
-                'language' => [
-                    'url' => '//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json',
-                ],
-                'dom' => 'Bfrtip',
-                'stateSave' => true,
-                'order' => [[0, 'desc']],
-                'buttons' => [
-                    //['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
-                    ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
-                ],
-            ]);
+            ->addAction(
+                [
+                    'width'     => '80px',
+                    'title'     => 'Ações',
+                    'className' => 'text-center',
+                    'printable' => false,
+                ]
+            )
+            ->parameters(
+                [
+                    'language'  => [
+                        'url' => '//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json',
+                    ],
+                    'dom'       => 'Bfrtip',
+                    'stateSave' => true,
+                    'order'     => [[0, 'desc']],
+                    'buttons'   => [
+                        //['extend' => 'create', 'className' => 'btn btn-default btn-sm no-corner',],
+                        ['extend' => 'export', 'className' => 'btn btn-default btn-sm no-corner',],
+                        ['extend' => 'print', 'className' => 'btn btn-default btn-sm no-corner',],
+                        ['extend' => 'reset', 'className' => 'btn btn-default btn-sm no-corner',],
+                        ['extend' => 'reload', 'className' => 'btn btn-default btn-sm no-corner',],
+                    ],
+                ]
+            );
     }
 
     /**
@@ -73,25 +77,25 @@ class NewsletterDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id' => [
-                'title' => '#ID',
+            'id'         => [
+                'title'      => '#ID',
                 'searchable' => false,
-                'width' => '60px',
-                'className' => 'text-center'
+                'width'      => '60px',
+                'className'  => 'text-center'
             ],
-            'email' => [
-                'data' => 'email',
-                'title' => 'E-mail',
+            'email'      => [
+                'data'       => 'email',
+                'title'      => 'E-mail',
                 'searchable' => true,
-                'orderable' => true,
+                'orderable'  => true,
             ],
             'created_at' => [
-                'data' => 'created_at',
-                'title' => 'Data cadastro',
-                'width' => '150px',
+                'data'       => 'created_at',
+                'title'      => 'Data cadastro',
+                'width'      => '150px',
                 'searchable' => false,
-                'orderable' => true,
-                'className' => 'text-center',
+                'orderable'  => true,
+                'className'  => 'text-center',
             ],
         ];
     }
@@ -103,6 +107,6 @@ class NewsletterDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'newsletters_' . time();
+        return 'newsletters_'.time();
     }
 }

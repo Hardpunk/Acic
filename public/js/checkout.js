@@ -8093,6 +8093,35 @@ $(function () {
       $(this).closest('form').trigger('submit');
     }
   });
+  $(".botaoFooter").on("click", function () {
+    var $this = $(this),
+        $form = $this.closest("form"),
+        $formWrapper = $this.closest(".subscribe-form"),
+        $responseMessage = $formWrapper.find('.newsletterMessage'),
+        isValid = $form[0].reportValidity(),
+        formData = $form.serialize();
+
+    if (isValid) {
+      $.ajax({
+        url: "/ajax/newsletter",
+        type: "POST",
+        data: formData,
+        beforeSend: function beforeSend() {
+          $this.button("loading");
+        }
+      }).done(function (data) {
+        if (data.status === true) {
+          $formWrapper.html("\n                        <div class=\"alert alert-success mb-0\" role=\"alert\">\n                            ".concat(data.message, "\n                        </div>"));
+        } else {
+          $this.button("reset");
+          $responseMessage.html("\n                        <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                            Erro ao cadastrar e-mail.\n                            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>");
+        }
+      }).fail(function (error) {
+        $this.button("reset");
+        $responseMessage.html("\n                    <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                        Erro ao cadastrar e-mail.\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>");
+      });
+    }
+  });
 });
 
 /***/ }),

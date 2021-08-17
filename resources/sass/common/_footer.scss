@@ -1,22 +1,14 @@
-@media only screen and (max-width: 600px) {
-  #footer {
-    .botaoFooter {
-      border-radius: 30px;
-      color: white;
-      width: 180px;
-      cursor: pointer;
-      height: 40px;
-      background: transparent;
-      border: 1px solid $white;
-      margin-top: 10px;
-    }
-  }
+footer.footer__wrapper {
+  margin-top: auto;
 }
 
-#footer {
+#footer,
+footer {
+  @include font-size(1rem);
+
   &,
   a {
-    color: $theme-color-1 !important;
+    color: $theme-color-1;
   }
 
   p {
@@ -31,38 +23,12 @@
     height: 40px;
     background: transparent;
     border: 1px solid $white;
-  }
-}
+    transition: all 250ms ease-in-out;
 
-footer.footer__wrapper {
-  margin-top: auto;
-}
-
-#footer,
-footer {
-  border-top: 2px solid $theme-color-1;
-  @include font-size(1rem);
-}
-
-footer,
-#footer {
-  &,
-  a {
-    color: $theme-color-1 !important;
-  }
-
-  p {
-    line-height: 1.25;
-  }
-
-  .botaoFooter {
-    border-radius: 30px;
-    color: white;
-    width: 180px;
-    cursor: pointer;
-    height: 40px;
-    background: transparent;
-    border: 1px solid $white;
+    &:hover {
+      color: $theme-color-1;
+      background-color: $white;
+    }
   }
 
   .news-footer {
@@ -70,14 +36,13 @@ footer,
     color: white;
   }
 
-  #inputletter {
+  .inputletter {
     border-radius: 25px;
     border: 1px solid $theme-color-1;
     width: 100%;
     margin-bottom: 2px;
     padding: 5px 20px !important;
     margin-right: 75px;
-
   }
 
   .copyright {
@@ -87,29 +52,7 @@ footer,
     padding-top: 10px;
     padding-bottom: 10px;
   }
-}
 
-#footer {
-  .copyright {
-    border-top: 2px solid $theme-color-1;
-  }
-}
-
-.social-media {
-  font-size: 36px;
-
-  > a {
-    &:not(:last-child) {
-      margin-right: 34px;
-    }
-
-    &:hover {
-      color: $theme-color-3 !important;
-    }
-  }
-}
-
-footer {
   .subfooter {
     background-color: $theme-color-1;
     color: #fff7f7 !important;
@@ -119,4 +62,25 @@ footer {
     }
   }
 
+  .social-media {
+    > a {
+      &:not(:last-child) {
+        margin-right: 34px;
+      }
+
+      &:hover {
+        color: $theme-color-3 !important;
+      }
+    }
+  }
+}
+
+#footer {
+  p, a.mailto {
+    @include font-size(14px);
+
+    i {
+      @include font-size(16px);
+    }
+  }
 }

@@ -8,7 +8,10 @@ use App\Http\Requests\CreateNewsletterRequest;
 use App\Newsletter;
 use App\Repositories\NewsletterRepository;
 use Auth;
+use Exception;
 use Flash;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Response;
 
 class NewsletterController extends AppBaseController
@@ -25,12 +28,12 @@ class NewsletterController extends AppBaseController
      * Display a listing of the Newsletter.
      *
      * @param  NewsletterDataTable  $newsletterDataTable
-     * @return Response
+     * @return mixed
      */
     public function index(NewsletterDataTable $newsletterDataTable)
     {
         $user = Auth::user();
-        return $newsletterDataTable->render('newsletters.index', compact('user'));
+        return $newsletterDataTable->render('admin.newsletters.index', compact('user'));
     }
 
     /**
@@ -38,7 +41,7 @@ class NewsletterController extends AppBaseController
      *
      * @param  CreateNewsletterRequest  $request
      *
-     * @return Response
+     * @return JsonResponse|RedirectResponse
      */
     public function store(CreateNewsletterRequest $request)
     {
@@ -63,7 +66,8 @@ class NewsletterController extends AppBaseController
      *
      * @param  int  $id
      *
-     * @return Response
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy($id)
     {

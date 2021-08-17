@@ -34,7 +34,7 @@ class UserController extends AppBaseController
     public function index(UserDataTable $userDataTable)
     {
         $user = Auth::user();
-        return $userDataTable->render('users.index', compact('user'));
+        return $userDataTable->render('admin.users.index', compact('user'));
     }
 
     /**
@@ -47,7 +47,7 @@ class UserController extends AppBaseController
     {
         $user = Auth::user();
         $viewTitle = 'Matriculados';
-        return $registeredUserDataTable->render('users.index', compact('user', 'viewTitle'));
+        return $registeredUserDataTable->render('admin.users.index', compact('user', 'viewTitle'));
     }
 
     /**
@@ -60,6 +60,6 @@ class UserController extends AppBaseController
     {
         $user = Auth::user();
         $viewTitle = 'Não Matriculados';
-        return $unregisteredUserDataTable->render('users.index', compact('user', 'viewTitle'));
+        return $unregisteredUserDataTable->render('admin.users.index', compact('user', 'viewTitle'));
     }
 }

@@ -30,7 +30,7 @@ class PaymentController extends AppBaseController
     public function index(PaymentDataTable $paymentDataTable)
     {
         $user = Auth::user();
-        return $paymentDataTable->render('payments.index', compact('user'));
+        return $paymentDataTable->render('admin.payments.index', compact('user'));
     }
 
     /**
@@ -51,7 +51,7 @@ class PaymentController extends AppBaseController
             return redirect(route('admin.payments.index'));
         }
 
-        return view('payments.show', compact('payment', 'user'));
+        return view('admin.payments.show', compact('payment', 'user'));
     }
 
 }

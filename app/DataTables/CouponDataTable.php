@@ -18,13 +18,13 @@ class CouponDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'coupons.datatables_actions');
+        return $dataTable->addColumn('action', 'admin.coupons.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Coupon $model
+     * @param \App\Coupon $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Coupon $model)
@@ -50,7 +50,7 @@ class CouponDataTable extends DataTable
             ])
             ->parameters([
                 'language' => [
-                    'url' => '//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json',
+                    'url' => '//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json',
                 ],
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,

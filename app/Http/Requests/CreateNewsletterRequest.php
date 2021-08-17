@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Newsletter;
+use App\Models\Newsletter;
 
 class CreateNewsletterRequest extends FormRequest
 {

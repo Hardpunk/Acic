@@ -1852,6 +1852,8 @@ window.SmoothScroll = __webpack_require__(/*! smooth-scroll */ "./node_modules/s
 
 __webpack_require__(/*! ./custom_easy_paginate/jquery.easyPaginate */ "./resources/js/custom_easy_paginate/jquery.easyPaginate.js");
 
+__webpack_require__(/*! ./init */ "./resources/js/init.js");
+
 __webpack_require__(/*! ./custom */ "./resources/js/custom.js");
 
 /***/ }),
@@ -1933,37 +1935,7 @@ function selectCategory(event) {
   return false;
 }
 
-function doSearch(e) {
-  var $form = $(e.currentTarget);
-
-  if ($form.find('input[name="q"]').val().length > 0) {
-    return;
-  }
-
-  e.preventDefault();
-}
-
 $(function () {
-  $.fn.button = function (action) {
-    if (action === "loading" && this.data("loading-text")) {
-      this.data("original-text", this.html()).html(this.data("loading-text")).prop("disabled", true);
-    }
-
-    if (action === "reset" && this.data("original-text")) {
-      this.html(this.data("original-text")).prop("disabled", false);
-    }
-  };
-
-  var maskBehavior = function maskBehavior(val) {
-    return val.replace(/\D/g, "").length === 11 ? "(00) 00000-0000" : "(00) 0000-00009";
-  },
-      options = {
-    onKeyPress: function onKeyPress(val, e, field, options) {
-      field.mask(maskBehavior.apply({}, arguments), options);
-    }
-  };
-
-  $(".phone-mask").mask(maskBehavior, options);
   $("#categories.select2").select2({
     placeholder: "-- CATEGORIAS --",
     language: "pt-BR"
@@ -1972,116 +1944,6 @@ $(function () {
   $("#customize-categorias").easyPaginate({
     paginateElement: ".category-item",
     elementsPerPage: 12
-  });
-  $(".placeholder").on("click", function () {
-    $(".search-input").trigger("focus");
-  });
-
-  if ($(".search-input").val()) {
-    $(".placeholder").hide();
-  }
-
-  $(".search-input").on("blur", function () {
-    if (!$(".search-input").val()) {
-      $(".placeholder").show();
-    }
-  });
-  $(".search-input").on("focus", function () {
-    if (!$(".search-input").val()) {
-      $(".placeholder").hide();
-    }
-  });
-  $(".search-input").on("input", function () {
-    if ($(".search-input").val()) {
-      $(".placeholder").hide();
-    }
-  });
-  $(".search-wrapper form").on("submit", doSearch);
-  var scroll = new SmoothScroll('a[href*="#"]');
-  $(".botaoFooter").on("click", function () {
-    var $this = $(this),
-        $form = $this.closest("form"),
-        isValid = $form[0].reportValidity(),
-        formData = $form.serialize();
-
-    if (isValid) {
-      $.ajax({
-        url: "/ajax/newsletter",
-        type: "POST",
-        data: formData,
-        beforeSend: function beforeSend() {
-          $this.button("loading");
-        }
-      }).done(function (data) {
-        if (data.status === true) {
-          $this.closest(".subscribe-form").html("\n                        <div class=\"alert alert-success mb-0\" role=\"alert\">\n                            ".concat(data.message, "\n                        </div>"));
-        } else {
-          $this.button("reset");
-          $("#newsletterMessage").html("\n                        <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                            Erro ao cadastrar e-mail.\n                            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>");
-        }
-      }).fail(function (error) {
-        $this.button("reset");
-        $("#newsletterMessage").html("\n                    <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                        Erro ao cadastrar e-mail.\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>");
-      });
-    }
-  });
-  $("#contactButton").on("click", function () {
-    var $this = $(this),
-        $form = $this.closest("form"),
-        isValid = $form[0].reportValidity(),
-        formData = $form.serialize();
-
-    if (isValid) {
-      $.ajax({
-        url: "/ajax/contact",
-        type: "POST",
-        data: formData,
-        beforeSend: function beforeSend() {
-          $this.button("loading");
-        }
-      }).done(function (data) {
-        if (data.status === true) {
-          $this.closest(".form-wrapper").html("\n                                <div class=\"alert alert-success mb-0\" role=\"alert\">\n                                    ".concat(data.message, "\n                                </div>"));
-        } else {
-          $this.button("reset");
-          grecaptcha.reset();
-          $("#contactMessage").html("\n                                <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                                    Erro ao enviar contato.\n                                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                        <span aria-hidden=\"true\">&times;</span>\n                                    </button>\n                                </div>");
-        }
-      }).fail(function (error) {
-        $this.button("reset");
-        grecaptcha.reset();
-        $("#contactMessage").html("\n                            <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                                ".concat(error.responseJSON.message, "\n                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                    <span aria-hidden=\"true\">&times;</span>\n                                </button>\n                            </div>"));
-      });
-    }
-  });
-  $("#contactBusinessButton").on("click", function () {
-    var $this = $(this),
-        $form = $this.closest("form"),
-        isValid = $form[0].reportValidity(),
-        formData = $form.serialize();
-
-    if (isValid) {
-      $.ajax({
-        url: "/ajax/business",
-        type: "POST",
-        data: formData,
-        beforeSend: function beforeSend() {
-          $this.button("loading");
-        }
-      }).done(function (data) {
-        if (data.status === true) {
-          $this.closest(".form-wrapper").html("\n                                <div class=\"alert alert-success mb-0\" role=\"alert\">\n                                    ".concat(data.message, "\n                                </div>"));
-        } else {
-          $this.button("reset");
-          grecaptcha.reset();
-          $("#businessContactMessage").html("\n                                <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                                    Erro ao enviar contato.\n                                    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                        <span aria-hidden=\"true\">&times;</span>\n                                    </button>\n                                </div>");
-        }
-      }).fail(function (error) {
-        $this.button("reset");
-        grecaptcha.reset();
-        $("#businessContactMessage").html("\n                            <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                                ".concat(error.responseJSON.message, "\n                                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                    <span aria-hidden=\"true\">&times;</span>\n                                </button>\n                            </div>"));
-      });
-    }
   });
 });
 
@@ -2349,6 +2211,341 @@ $(function () {
     });
   };
 })(jQuery);
+
+/***/ }),
+
+/***/ "./resources/js/init.js":
+/*!******************************!*\
+  !*** ./resources/js/init.js ***!
+  \******************************/
+/***/ (() => {
+
+//
+// FUNCTIONS
+//
+function cartItemsTemplate(items) {
+  if (items.length > 0) {
+    var $html = "";
+
+    for (var key in items) {
+      var link = items[key].type == "trail" ? "trilhas-conhecimento" : "cursos/".concat(items[key].category_slug);
+      $html += "<div class=\"cart-item__box\">\n                <a href=\"/".concat(link, "/").concat(items[key].slug, "\"\n                    class=\"cart-item__link\">\n                    <div class=\"row align-items-center mx-0\">\n                        <div class=\"col-1 d-flex align-items-center justify-content-center px-0 text-center\">\n                            <span class=\"remove-cart-item text-center\" title=\"Remover item\"\n                                data-item-type=\"").concat(items[key].type, "\"\n                                data-item-id=\"").concat(items[key].id, "\">\n                                <i class=\"fas fa-times red-text\"></i>\n                            </span>\n                        </div>\n                        <div class=\"col-5 pr-0\">\n                            <div class=\"item-image\">\n                                <img class=\"img-fluid\" src=\"").concat(items[key].type == "trail" ? items[key].cover_details : items[key].image, "\"\n                                    title=\"").concat(items[key].title, "\" alt=\"").concat(items[key].title, "\" />\n                            </div>\n                        </div>\n                        <div class=\"col-5\">\n                            <div class=\"item-description\">\n                                <p class=\"area-category-title mb-0\">").concat(items[key].type === "trail" ? "Trilha" : items[key].category_title, "</p>\n                                <p class=\"item-title mb-0\">").concat(items[key].title, "</p>\n                            </div>\n                        </div>\n                        <div class=\"col-11 offset-1\">\n                            <p class=\"mb-0 item-price\">R$ ").concat(items[key].price, "</p>\n                        </div>\n                    </div>\n                </a>\n            </div>");
+    }
+
+    return $html;
+  }
+}
+
+function click_addItemCart(event) {
+  event.preventDefault();
+  var $this = $(this),
+      $form = $this.closest("form"),
+      action = $form[0].action,
+      formData = $form.serialize();
+  $.ajax({
+    url: "".concat(action),
+    type: "POST",
+    data: formData,
+    beforeSend: function beforeSend() {
+      $this.button("loading");
+    }
+  }).done(function (data) {
+    if (data.ok === true) {
+      if (data.total > 0) {
+        var $html = cartItemsTemplate(data.items);
+        $(".cart-details__wrapper").hide();
+        $(".cart .arrow-down > i").removeClass("fa-rotate-180");
+        $(".cart-items").text(data.total);
+        $(".cart-button").addClass("has-items");
+        $(".subtotal").text(data.parcelado);
+        $(".cart-details__wrapper--content .card-body").html($html);
+        $this.hide();
+        $this.next(".go-checkout-button").show();
+      }
+    }
+  }).fail(function (error) {}).always(function () {
+    $this.button("reset");
+  });
+}
+
+function click_openCartDetails(event) {
+  var $this = $(this),
+      $parent = $this.parent();
+  toggleCartContainer($parent);
+}
+
+function click_removeCartItem(event) {
+  event.stopImmediatePropagation();
+  event.preventDefault();
+  var $this = $(this),
+      $item = $this.closest(".cart-item__box"),
+      type = $this.data("itemType"),
+      id = $this.data("itemId"),
+      cartItems = parseInt($(".cart-items").text());
+  $.ajax({
+    url: "/ajax/cart/remove/".concat(type, "/").concat(id),
+    type: "POST",
+    data: {
+      _token: $('meta[name="csrf-token"]').attr("content")
+    },
+    beforeSend: showCartLoading
+  }).done(function (data) {
+    if (data.ok === true) {
+      $item.fadeOut("slow", function () {
+        $(this).remove();
+      });
+      $(".cart-items").text(--cartItems);
+
+      if (cartItems === 0) {
+        // $('.cart-details__wrapper').remove();
+        // $('.arrow-down').remove();
+        $(".cart-button").removeClass("has-items");
+      }
+    }
+  }).fail(function (error) {}).always(hideCartLoading);
+}
+
+function countLines(target) {
+  var style = window.getComputedStyle(target, null);
+  var height = parseInt(style.getPropertyValue("height"));
+  var font_size = parseInt(style.getPropertyValue("font-size"));
+  var line_height = parseInt(style.getPropertyValue("line-height"));
+  var box_sizing = style.getPropertyValue("box-sizing");
+  if (isNaN(line_height)) line_height = font_size * 1.2;
+
+  if (box_sizing === "border-box") {
+    var padding_top = parseInt(style.getPropertyValue("padding-top"));
+    var padding_bottom = parseInt(style.getPropertyValue("padding-bottom"));
+    var border_top = parseInt(style.getPropertyValue("border-top-width"));
+    var border_bottom = parseInt(style.getPropertyValue("border-bottom-width"));
+    height = height - padding_top - padding_bottom - border_top - border_bottom;
+  }
+
+  var lines = Math.ceil(height / line_height);
+  return lines;
+}
+
+function doSearch(e) {
+  var $form = $(e.currentTarget);
+
+  if ($form.find('input[name="q"]').val().length > 0) {
+    return;
+  }
+
+  e.preventDefault();
+}
+
+function hideCartLoading() {
+  $(".cart-loading").hide();
+}
+
+function showCartLoading() {
+  $(".cart-loading").show();
+}
+
+function toggleCartContainer(el) {
+  el.find(".cart-details__wrapper").slideToggle();
+  el.find(".arrow-down > i").toggleClass("fa-rotate-180");
+  $("#cart-list-overlay").toggleClass("active");
+}
+
+function updateTextLimiter() {
+  var windowWidth = $(window).width(),
+      limitLines = windowWidth < 768 ? 10 : 5;
+  $(".course-description").each(function () {
+    var $this = $(this);
+
+    if (countLines($this[0]) > limitLines) {
+      $this.addClass("truncate");
+      $this.next(".btn-read-more").removeClass("d-none");
+      $this.next(".btn-show-more").show();
+    }
+  });
+}
+
+$(function () {
+  //
+  // CONSTANTS AND VARIABLES
+  //
+  var maskBehavior = function maskBehavior(val) {
+    return val.replace(/\D/g, "").length === 11 ? "(00) 00000-0000" : "(00) 0000-00009";
+  },
+      options = {
+    onKeyPress: function onKeyPress(val, e, field, options) {
+      field.mask(maskBehavior.apply({}, arguments), options);
+    }
+  };
+
+  var scroll = new SmoothScroll('a[href*="#"]'); //
+  // PLUGINS INITIALIZE
+  //
+
+  $.fn.button = function (action) {
+    if (action === "loading" && this.data("loading-text")) {
+      this.data("original-text", this.html()).html(this.data("loading-text")).prop("disabled", true);
+    }
+
+    if (action === "reset" && this.data("original-text")) {
+      this.html(this.data("original-text")).prop("disabled", false);
+    }
+  };
+
+  $('[data-toggle="tooltip"]').tooltip();
+  $(".phone-mask").mask(maskBehavior, options);
+
+  if ($.fn.paroller) {
+    $('.paroller').paroller();
+  }
+
+  if ($("#card-floating").length > 0) {
+    $("#card-floating").stickySidebar({
+      containerSelector: "#trail__wrapper",
+      innerWrapperSelector: ".card-floating__inner",
+      topSpacing: 0,
+      bottomSpacing: 0
+    });
+  }
+
+  if ($("#course-card-floating").length > 0) {
+    $("#course-card-floating").stickySidebar({
+      containerSelector: "#course__wrapper",
+      innerWrapperSelector: ".card-floating__inner",
+      topSpacing: 0,
+      bottomSpacing: 0
+    });
+  } //
+  // INIT FUNCTIONS
+  //
+
+
+  updateTextLimiter();
+
+  if ($(".search-input").val()) {
+    $(".placeholder").hide();
+  } //
+  // EVENTS LISTENERS
+  //
+  // CLICK EVENTS
+
+
+  $(".placeholder").on("click", function () {
+    $(".search-input").trigger("focus");
+  });
+  $(".btn-show-more").on("click", function () {
+    var $this = $(this);
+
+    if ($this.hasClass("closed")) {
+      $this.prev(".course-description").removeClass("truncate");
+      $this.prev(".topics-description").removeClass("topics-truncate");
+      $this.find("small").html($this.find("small").html().replace("VISUALIZAR MAIS", "VISUALIZAR MENOS"));
+    } else {
+      $this.prev(".course-description").addClass("truncate");
+      $this.prev(".topics-description").addClass("topics-truncate");
+      $this.find("small").html($this.find("small").html().replace("VISUALIZAR MENOS", "VISUALIZAR MAIS"));
+    }
+
+    $this.toggleClass("closed open");
+  });
+  $(".checkout-button").on("click", function () {
+    $(this).button("loading");
+    $(this).closest("form").trigger("submit");
+  });
+  $(".go-checkout-button").on("click", function () {
+    $(this).button("loading");
+  });
+  $("#cart-list-overlay").on("click", function (e) {
+    var $cartContainer = $(".cart-button.has-items .nav-link.cart").parent();
+    toggleCartContainer($cartContainer);
+  });
+  $(".botaoFooter").on("click", function () {
+    var $this = $(this),
+        $form = $this.closest("form"),
+        $formWrapper = $this.closest(".subscribe-form"),
+        $responseMessage = $formWrapper.find('.newsletterMessage'),
+        isValid = $form[0].reportValidity(),
+        formData = $form.serialize();
+
+    if (isValid) {
+      $.ajax({
+        url: "/ajax/newsletter",
+        type: "POST",
+        data: formData,
+        beforeSend: function beforeSend() {
+          $this.button("loading");
+        }
+      }).done(function (data) {
+        if (data.status === true) {
+          $formWrapper.html("\n                        <div class=\"alert alert-success mb-0\" role=\"alert\">\n                            ".concat(data.message, "\n                        </div>"));
+        } else {
+          $this.button("reset");
+          $responseMessage.html("\n                        <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                            Erro ao cadastrar e-mail.\n                            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>");
+        }
+      }).fail(function (error) {
+        $this.button("reset");
+        $responseMessage.html("\n                    <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                        Erro ao cadastrar e-mail.\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>");
+      });
+    }
+  });
+  $("#btn-contact-send").on("click", function () {
+    var $this = $(this),
+        $form = $this.closest("form"),
+        $formWrapper = $form.parent(),
+        $responseMessage = $formWrapper.find('.formResponse'),
+        isValid = $form[0].reportValidity(),
+        formData = $form.serialize();
+
+    if (isValid) {
+      $.ajax({
+        url: "/ajax/contact",
+        type: "POST",
+        data: formData,
+        beforeSend: function beforeSend() {
+          $this.button("loading");
+        }
+      }).done(function (data) {
+        if (data.status === true) {
+          $formWrapper.html("\n                        <div class=\"alert alert-success mb-0\" role=\"alert\">\n                            ".concat(data.message, "\n                        </div>"));
+        } else {
+          $this.button("reset");
+          grecaptcha.reset();
+          $responseMessage.html("\n                        <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                            Erro ao cadastrar e-mail.\n                            <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                                <span aria-hidden=\"true\">&times;</span>\n                            </button>\n                        </div>");
+        }
+      }).fail(function (error) {
+        $this.button("reset");
+        grecaptcha.reset();
+        $responseMessage.html("\n                    <div class=\"alert alert-danger alert-dismissible fade show mb-0 mt-2\" role=\"alert\">\n                        Erro ao cadastrar e-mail.\n                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n                            <span aria-hidden=\"true\">&times;</span>\n                        </button>\n                    </div>");
+      });
+    }
+  }); // BLUR EVENTS
+
+  $(".search-input").on("blur", function () {
+    if (!$(".search-input").val()) {
+      $(".placeholder").show();
+    }
+  }); // FOCUS EVENTS
+
+  $(".search-input").on("focus", function () {
+    if (!$(".search-input").val()) {
+      $(".placeholder").hide();
+    }
+  }); // INPUT EVENTS
+
+  $(".search-input").on("input", function () {
+    if ($(".search-input").val()) {
+      $(".placeholder").hide();
+    }
+  }); // SUBMIT EVENTS
+
+  $(".search-wrapper form").on("submit", doSearch);
+}); //
+// DYNAMIC EVENTS
+//
+
+$(document).on("click", ".cart-button.has-items .nav-link.cart", click_openCartDetails);
+$(document).on("click", ".remove-cart-item", click_removeCartItem);
+$(window).on("resize", function () {
+  updateTextLimiter();
+});
 
 /***/ }),
 

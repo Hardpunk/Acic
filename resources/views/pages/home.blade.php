@@ -1,3 +1,7 @@
+@section('js_tags')
+    {!! htmlScriptTagJsApi() !!}
+@endsection
+
 @include('pages.partials._area-cursos')
 
 @include('pages.partials._treinamentos')

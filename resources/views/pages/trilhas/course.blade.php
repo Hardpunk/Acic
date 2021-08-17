@@ -127,7 +127,3 @@
 
     @include('pages.partials._faq')
 @endsection
-
-@section('js')
-    <script src="{{ asset('js/init.js') }}"></script>
-@endsection

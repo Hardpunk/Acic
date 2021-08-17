@@ -41,9 +41,9 @@ class Contact extends Model
      * @param  DateTimeInterface  $date
      * @return string
      */
-    /*protected function serializeDate(DateTimeInterface $date)
+    protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('d/m/Y H:i:s');
-    }*/
+    }
 
 }

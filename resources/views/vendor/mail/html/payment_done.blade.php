@@ -36,8 +36,8 @@
                     <tr>
                         <td class="header"
                             style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 10px 0; text-align: center;">
-                            <a href="https://www.isigtreinamentos.com.br" target="_blank">
-                                <img src="https://www.isigtreinamentos.com.br/images/logo-small.png"
+                            <a href="{{ config('app.url') }}" target="_blank">
+                                <img src="{{ config('app.url') }}/images/logo-small.png"
                                     alt="{{ config('app.name') }}" title="{{ config('app.name') }}"
                                     style="width: 200px;" />
                             </a>
@@ -115,7 +115,7 @@
                                                                     <tr>
                                                                         <td
                                                                             style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                                                            <a href="https://www.sie.com.br/isig-treinamentos"
+                                                                            <a href="https://www.sie.com.br/acicescoladenegocios"
                                                                                 class="button button-acim"
                                                                                 target="_blank"
                                                                                 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); color: #ffffff; display: inline-block; text-decoration: none; -webkit-text-size-adjust: none; background-color: #0c6c4f; border-top: 10px solid #0c6c4f; border-right: 18px solid #0c6c4f; border-bottom: 10px solid #0c6c4f; border-left: 18px solid #0c6c4f;">{{ config('app.name') }}</a>
@@ -147,7 +147,7 @@
                                                                         style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 0;">
                                                                         <p
                                                                             style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 14px; line-height: 1.5em; margin-top: 0; text-align: center; margin-bottom: 0; padding-bottom: 0;">
-                                                                            https://www.sie.com.br/isig-treinamentos</p>
+                                                                            https://www.sie.com.br/acicescoladenegocios</p>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -164,10 +164,10 @@
 
                                         <p
                                             style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 14px; line-height: 1.5em; margin-top: 15px; text-align: center;">
-                                            <a href="mailto:contato@isigtreinamentos.com.br" title="contato@isigtreinamentos.com.br"
+                                            <a href="mailto:escoladenegocios@aciccaruaru.com" title="escoladenegocios@aciccaruaru.com"
                                                 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 14px; line-height: 1.5em; text-align: center; display: inline-block;"
                                                 target="_blank">
-                                                contato@isigtreinamentos.com.br
+                                                escoladenegocios@aciccaruaru.com
                                             </a>
                                         </p>
                                         <p

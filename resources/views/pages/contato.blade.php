@@ -48,7 +48,7 @@
                         </div>
                         <div>
                             <a class="text-cinza"
-                                href="mailto:contato@isigtreinamentos.com.br">contato@isigtreinamentos.com.br</a>
+                                href="mailto:escoladenegocios@aciccaruaru.com">escoladenegocios@aciccaruaru.com</a>
                         </div>
                     </div>
                     <div class="d-flex my-3 py-3">
@@ -56,7 +56,7 @@
                             <i aria-hidden="true" class="fas fa-phone-volume"></i>
                         </div>
                         <div>
-                            <p>Distrito Federal: (61) 99884-2889</p>
+                            <p>Caruaru (PE): (81) 3721 2725</p>
                         </div>
                     </div>
                     <div class="d-flex my-3 py-3">
