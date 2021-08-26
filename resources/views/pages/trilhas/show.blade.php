@@ -31,9 +31,9 @@
             <div id="card-floating" class="d-none d-md-block">
                 <div class="card-floating__inner">
                     <div class="card card-floating__content">
-                        <div class="discount">
+                        {{--<div class="discount">
                             <span class="percentage">{{ number_format($trilha->discount, 0) }}%</span>
-                        </div>
+                        </div>--}}
                         <div class="price__wrapper pt-3 mb-4">
                             <div class="price__wrapper--content">
                                 <p class="price mb-0">

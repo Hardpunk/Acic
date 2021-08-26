@@ -2,9 +2,9 @@
     <div class="container">
         <div class="trail-price__wrapper--inner">
             <div class="trail-price__content">
-                <div class="discount">
+                {{--<div class="discount">
                     <span class="percentage">{{ number_format($trilha->discount, 0) }}%</span>
-                </div>
+                </div>--}}
                 <div class="price__wrapper pt-3 mb-4">
                     <div class="price__wrapper--content">
                         <p class="price mb-0">
